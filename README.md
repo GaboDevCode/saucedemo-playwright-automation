@@ -25,6 +25,7 @@ La idea central es que **la automatización se construye a partir del diseño de
 
 ## Stack
 
+
 | Área | Herramienta |
 |---|---|
 | Lenguaje | Python |
