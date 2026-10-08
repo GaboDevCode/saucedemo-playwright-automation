@@ -4,7 +4,7 @@
 
 | Requisito | Escenario | Caso de Prueba | Prioridad | ¿Automatizar? | Test Automatizado | Estado |
 | --- | --- | --- | --- | --- | --- | --- |
-| REQ-LOGIN-01 | SC-LOGIN-001 | TC-LOGIN-001 | P0 | Sí | `test_login_valid_credentials` | Diseñado |
+| REQ-LOGIN-01 | SC-LOGIN-001 | TC-LOGIN-001 | P0 | Sí | `test_login_valid_credentials` | Automatizado |
 | REQ-LOGIN-02 | SC-LOGIN-002 | TC-LOGIN-002 | P1 | Sí | `test_login_invalid_credentials` | Diseñado |
 | REQ-LOGIN-02 | SC-LOGIN-003 | TC-LOGIN-003 | P1 | Sí | `test_login_invalid_credentials` | Diseñado |
 | REQ-LOGIN-02 | SC-LOGIN-004 | TC-LOGIN-004 | P1 | Sí | `test_login_invalid_credentials` | Diseñado |
