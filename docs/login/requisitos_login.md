@@ -26,8 +26,8 @@ Funcional / Login
 Gabriel Bocanegra
 
 ## Trazabilidad
-- Este requisito se vincula al escenario de "Login exitoso" (SC-LOGIN-001).
-
+- SC-LOGIN-001: Login con credenciales válidas 
+    
 
 
 
@@ -56,6 +56,39 @@ Funcional / Login
 Eduardo Gabriel Bocanegra Toledo
 
 ### Trazabilidad
-- Este requisito se vincula al escenario "Login con credenciales inválidas" SC-LOGIN-002 
+- SC-LOGIN-002: Login con usuario y contraseña inválidos
+- SC-LOGIN-003: Login con usuario inexistente y contraseña válida
+- SC-LOGIN-004: Login con usuario válido y contraseña inválida
+
+
+---
+
+
+
+# Requisito: [Campos obligatorios en el login]
+
+## ID del Requisito
+REQ-LOGIN-03
+
+## Descripción
+El sistema debe exigir que el usuario y la contraseña estén completos antes de intentar la autenticación. Si falta alguno de los dos, debe impedir el acceso e informar al usuario cuál es el campo requerido.
+
+## Criterios de Aceptación
+1. El usuario deja vacío el campo de usuario, el de contraseña, o ambos.
+2. Al presionar el botón de login, se muestra un mensaje de error que indica el campo requerido.
+3. El usuario permanece en la página de login.
+4. El sistema no permite el acceso al inventario.
+
+## Prioridad
+P1 (Alta)
+
+## Tipo de prueba
+Funcional / Login / Validación de campos
+
+## Responsable
+Eduardo Gabriel Bocanegra Toledo
+
+## Trazabilidad
+- SC-LOGIN-005: Login con usuario y contraseña vacíos
 
 ---
