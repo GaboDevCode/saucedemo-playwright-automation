@@ -5,10 +5,12 @@
 | Requisito | Escenario | Caso de Prueba | Prioridad | ¿Automatizar? | Test Automatizado | Estado |
 | --- | --- | --- | --- | --- | --- | --- |
 | REQ-LOGIN-01 | SC-LOGIN-001 | TC-LOGIN-001 | P0 | Sí | `test_login_valid_credentials` | Automatizado |
-| REQ-LOGIN-02 | SC-LOGIN-002 | TC-LOGIN-002 | P1 | Sí | `test_login_invalid_credentials` | Diseñado |
-| REQ-LOGIN-02 | SC-LOGIN-003 | TC-LOGIN-003 | P1 | Sí | `test_login_invalid_credentials` | Diseñado |
-| REQ-LOGIN-02 | SC-LOGIN-004 | TC-LOGIN-004 | P1 | Sí | `test_login_invalid_credentials` | Diseñado |
-| REQ-LOGIN-03 | SC-LOGIN-005 | TC-LOGIN-005 | P1 | Sí | `test_login_empty_credentials` | Diseñado |
+| REQ-LOGIN-02 | SC-LOGIN-002 | TC-LOGIN-002 | P1 | Sí | `test_login_invalid_user_invalid_password` | Automatizado |
+| REQ-LOGIN-02 | SC-LOGIN-003 | TC-LOGIN-003 | P1 | Sí | `test_login_nonexistent_user_valid_password` | Automatizado |
+| REQ-LOGIN-02 | SC-LOGIN-004 | TC-LOGIN-004 | P1 | Sí | `test_login_valid_user_invalid_password` | Automatizado |
+| REQ-LOGIN-03 | SC-LOGIN-005 | TC-LOGIN-005 | P1 | Sí | `test_login_empty_credentials` | Automatizado |
+| REQ-LOGIN-03 | SC-LOGIN-006 | TC-LOGIN-006 | P1 | Sí | `test_login_valid_user_empty_password` | Automatizado |
+| REQ-LOGIN-03 | SC-LOGIN-007 | TC-LOGIN-007 | P1 | Sí | `test_login_empty_user_valid_password` | Automatizado |
 
 
 ### Pendientes de cobertura
