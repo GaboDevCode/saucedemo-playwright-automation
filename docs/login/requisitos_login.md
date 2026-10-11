@@ -65,7 +65,7 @@ Eduardo Gabriel Bocanegra Toledo
 
 
 
-# Requisito: [Campos obligatorios en el login]
+# Requisito: Campos obligatorios en el login
 
 ## ID del Requisito
 REQ-LOGIN-03
@@ -74,10 +74,13 @@ REQ-LOGIN-03
 El sistema debe exigir que el usuario y la contraseña estén completos antes de intentar la autenticación. Si falta alguno de los dos, debe impedir el acceso e informar al usuario cuál es el campo requerido.
 
 ## Criterios de Aceptación
-1. El usuario deja vacío el campo de usuario, el de contraseña, o ambos.
-2. Al presionar el botón de login, se muestra un mensaje de error que indica el campo requerido.
-3. El usuario permanece en la página de login.
-4. El sistema no permite el acceso al inventario.
+1. Si el campo de usuario está vacío (con la contraseña vacía o completa), al presionar el botón de login se muestra un mensaje de error que indica que el usuario es obligatorio.
+2. Si el usuario está informado y la contraseña está vacía, al presionar el botón de login se muestra un mensaje de error que indica que la contraseña es obligatoria.
+3. En todos los casos, el usuario permanece en la página de login.
+4. En todos los casos, el sistema no permite el acceso al inventario.
+
+## Observaciones
+- Con ambos campos vacíos, la aplicación informa primero el campo de usuario (`Username is required`). El orden de validación es comportamiento observado, no un requisito formal. Si cambia, se registra como observación hasta confirmarlo (Test Plan 1.3).
 
 ## Prioridad
 P1 (Alta)
@@ -90,5 +93,7 @@ Eduardo Gabriel Bocanegra Toledo
 
 ## Trazabilidad
 - SC-LOGIN-005: Login con usuario y contraseña vacíos
+- SC-LOGIN-006: Login con usuario válido y contraseña vacía
+- SC-LOGIN-007: Login con usuario vacío y contraseña válida
 
 ---

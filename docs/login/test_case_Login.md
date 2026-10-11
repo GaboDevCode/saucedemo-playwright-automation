@@ -129,3 +129,55 @@
 **Resultado esperado**
 - La URL sigue siendo `https://www.saucedemo.com/`.
 - Se muestra el mensaje de error: `Epic sadface: Username is required`
+
+
+
+### TC-LOGIN-006 — Login con usuario válido y contraseña vacía
+
+| Campo | Detalle |
+| :--- | :--- |
+| Escenario | SC-LOGIN-006 |
+| Requisito | REQ-LOGIN-03 |
+| Prioridad | P1 |
+| Tipo | Negativo |
+| Precondiciones | Sesión nueva, sin cookies; sitio disponible |
+| Datos de entrada | Usuario: `standard_user` · Contraseña: *(vacía)* |
+| Automatizar | Sí. Determinista, P1, regresión, bajo costo de mantenimiento. Cubre la validación de contraseña vacía, que TC-LOGIN-005 no ejercita porque la app valida primero el usuario |
+
+**Pasos**
+1. Abrir la página `https://www.saucedemo.com/`.
+2. Ingresar `standard_user` en el campo de usuario.
+3. Dejar vacío el campo de contraseña.
+4. Pulsar el botón Login.
+
+**Resultado esperado**
+- La URL sigue siendo `https://www.saucedemo.com/`.
+- Se muestra el mensaje de error: `Epic sadface: Password is required`.
+- No se muestra el contenedor del inventario.
+
+---
+
+### TC-LOGIN-007 — Login con usuario vacío y contraseña válida
+
+| Campo | Detalle |
+| :--- | :--- |
+| Escenario | SC-LOGIN-007 |
+| Requisito | REQ-LOGIN-03 |
+| Prioridad | P1 |
+| Tipo | Negativo |
+| Precondiciones | Sesión nueva, sin cookies; sitio disponible |
+| Datos de entrada | Usuario: *(vacío)* · Contraseña: `secret_sauce` |
+| Automatizar | Sí. Determinista, P1, regresión, bajo costo de mantenimiento. Ejercita la misma rama que TC-LOGIN-005, pero protege contra una regresión en la que la validación del usuario dependa de la contraseña. Candidato a parametrizar junto con TC-005 y TC-006 |
+
+
+**Pasos**
+1. Abrir la página `https://www.saucedemo.com/`.
+2. Dejar vacío el campo de usuario.
+3. Ingresar `secret_sauce` en el campo de contraseña.
+4. Pulsar el botón Login.
+
+**Resultado esperado**
+- La URL sigue siendo `https://www.saucedemo.com/`.
+- Se muestra el mensaje de error: `Epic sadface: Username is required`.
+- No se muestra el contenedor del inventario.
+
