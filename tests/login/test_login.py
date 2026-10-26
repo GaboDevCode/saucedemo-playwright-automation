@@ -10,6 +10,9 @@ INVALID_CREDENTIALS_ERROR = ("Epic sadface: Username and password do not match a
 USER_BLOCKED_ERROR = "Epic sadface: Sorry, this user has been locked out."
 
 
+
+
+
 @pytest.mark.smoke
 def test_login_valid_credentials(page: Page):
     """TC-LOGIN-001 | SC-LOGIN-001 | REQ-LOGIN-01"""
@@ -97,6 +100,41 @@ def test_login_rejected(page: Page, username: str, password: str, expected_error
     expect(page).to_have_url("/")
     expect(page.locator('[data-test="inventory-container"]')).not_to_be_visible()
 
+
+
+
+@pytest.mark.regression
+@pytest.mark.parametrize(
+    "path, expected_error",
+    [
+        pytest.param(
+    "/inventory.html",
+            "Epic sadface: You can only access '/inventory.html' when you are logged in.",
+            id="TC-LOGIN-009-inventory"
+        ),
+        pytest.param(
+        "/cart.html",
+                "Epic sadface: You can only access '/cart.html' when you are logged in.",
+         id="TC-LOGIN-009-Cart"
+       ),
+        pytest.param(
+    "/checkout-step-one.html",
+            "Epic sadface: You can only access '/checkout-step-one.html' when you are logged in.",
+        id="TC-LOGIN-009-checkout_step_one"
+    ),
+  ]
+)
+
+
+def test_access_internal_page_without_session(page: Page, path: str, expected_error: str):
+    """SC-LOGIN-009 | REQ-LOGIN-05"""
+
+    login_page = LoginPage(page)
+    page.goto(path)
+
+    expect(page).to_have_url("/")
+    expect(login_page.error_message).to_have_text(expected_error)
+    expect(page.locator('[data-test="inventory-container"]')).not_to_be_visible()
 
 
 
