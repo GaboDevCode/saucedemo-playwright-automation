@@ -7,6 +7,7 @@ from pages.login_page import LoginPage
 USERNAME_REQUIRED_ERROR = "Epic sadface: Username is required"
 PASSWORD_REQUIRED_ERROR = "Epic sadface: Password is required"
 INVALID_CREDENTIALS_ERROR = ("Epic sadface: Username and password do not match any user in this service")
+USER_BLOCKED_ERROR = "Epic sadface: Sorry, this user has been locked out."
 
 
 @pytest.mark.smoke
@@ -76,11 +77,18 @@ def test_login_invalid_credentials(page: Page, username: str, password: str):
             "secret_sauce",
             USERNAME_REQUIRED_ERROR,
             id="TC-LOGIN-007-login_empty_user_valid_password",
+        ),
+        pytest.param(
+            "locked_out_user",
+            "secret_sauce",
+            USER_BLOCKED_ERROR,
+            id="TC-LOGIN-008-login_locked_out_user"
+            ,
         )
     ]
 )
-def test_login_credentials_required(page: Page, username: str, password: str, expected_error: str):
-    """SC-LOGIN-005/006/007 | REQ-LOGIN-03"""
+def test_login_rejected(page: Page, username: str, password: str, expected_error: str):
+    """SC-LOGIN-005/006/007 | REQ-LOGIN-03 · SC-LOGIN-008 | REQ-LOGIN-04"""
     login_page = LoginPage(page)
     login_page.navigate_to_login()
     login_page.login(username, password)
