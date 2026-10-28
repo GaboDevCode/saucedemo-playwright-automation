@@ -19,3 +19,6 @@ class LoginPage(Page):
         self.password.fill(password)
         self.login_button.click()
 
+
+
+

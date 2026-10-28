@@ -1,5 +1,7 @@
 import pytest
 from playwright.sync_api import Page, expect
+
+from pages import InventoryPage
 from pages.login_page import LoginPage
 
 
@@ -139,6 +141,31 @@ def test_access_internal_page_without_session(page: Page, path: str, expected_er
 
 
 
+
+
+
+@pytest.mark.regression
+def test_logout_from_menu(page, logged_in_inventory):
+    """TC-LOGIN-010 | SC-LOGIN-010 | REQ-LOGIN-06"""
+
+    inventory = logged_in_inventory
+    login_page = LoginPage(page)
+
+    inventory.open_menu()
+    inventory.click_logout()
+
+    expect(page).to_have_url("/")
+    expect(login_page.username).to_be_visible()
+    expect(login_page.password).to_be_visible()
+    expect(login_page.login_button).to_be_visible()
+
+    page.goto("/inventory.html")
+
+    expect(page).to_have_url("/")
+    expect(login_page.error_message).to_have_text(
+        "Epic sadface: You can only access '/inventory.html' when you are logged in."
+    )
+    expect(page.locator('[data-test="inventory-container"]')).not_to_be_visible()
 
 
 
