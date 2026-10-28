@@ -181,3 +181,83 @@
 - Se muestra el mensaje de error: `Epic sadface: Username is required`.
 - No se muestra el contenedor del inventario.
 
+
+
+### TC-LOGIN-008 — Login con usuario bloqueado
+
+| Campo | Detalle |
+| :--- | :--- |
+| Escenario | SC-LOGIN-008 |
+| Requisito | REQ-LOGIN-04 |
+| Prioridad | P1 |
+| Tipo | Negativo |
+| Precondiciones | Sesión nueva, sin cookies; sitio disponible |
+| Datos de entrada | Usuario: `locked_out_user` · Contraseña: `secret_sauce` |
+| Automatizar | Sí. Resultado determinista y mensaje fijo; P1 en regresión; reutiliza `LoginPage`, por lo que el costo de mantenimiento es bajo. |
+
+**Pasos**
+1. Abrir la página `https://www.saucedemo.com/`.
+2. Ingresar `locked_out_user` en el campo de usuario.
+3. Ingresar `secret_sauce` en el campo de contraseña.
+4. Pulsar el botón Login.
+
+**Resultado esperado**
+- La URL sigue siendo `https://www.saucedemo.com/`.
+- Se muestra el mensaje de error: `Epic sadface: Sorry, this user has been locked out.`
+- No se muestra el contenedor del inventario.
+
+---
+
+### TC-LOGIN-009 — Acceso directo a página interna sin sesión
+
+| Campo | Detalle |
+| :--- | :--- |
+| Escenario | SC-LOGIN-009 |
+| Requisito | REQ-LOGIN-05 |
+| Prioridad | P1 |
+| Tipo | Negativo |
+| Precondiciones | Sesión nueva, sin cookies; sitio disponible |
+| Datos de entrada | Una página interna por ejecución (ver tabla de datos) |
+| Automatizar | Sí. Determinista; P1 en regresión; no requiere precondiciones y los datos se pueden parametrizar, por lo que el costo de mantenimiento es bajo. |
+
+**Tabla de datos**
+
+| Página interna | URL | Mensaje esperado |
+| :--- | :--- | :--- |
+| Inventario | `https://www.saucedemo.com/inventory.html` | `Epic sadface: You can only access '/inventory.html' when you are logged in.` |
+| Carrito | `https://www.saucedemo.com/cart.html` | `Epic sadface: You can only access '/cart.html' when you are logged in.` |
+| Checkout (paso 1) | `https://www.saucedemo.com/checkout-step-one.html` | `Epic sadface: You can only access '/checkout-step-one.html' when you are logged in.` |
+
+**Pasos**
+1. Abrir directamente la URL de la página interna (sin haber iniciado sesión).
+
+**Resultado esperado**
+- El sistema redirige a `https://www.saucedemo.com/`.
+- Se muestra el mensaje de error correspondiente a la página solicitada (ver tabla de datos).
+- No se muestra el contenedor del inventario.
+
+---
+
+### TC-LOGIN-010 — Cierre de sesión desde el menú
+
+| Campo | Detalle |
+| :--- | :--- |
+| Escenario | SC-LOGIN-010 |
+| Requisito | REQ-LOGIN-06 |
+| Prioridad | P1 |
+| Tipo | Positivo |
+| Precondiciones | Usuario `standard_user` con sesión iniciada y posicionado en `https://www.saucedemo.com/inventory.html`; sitio disponible |
+| Datos de entrada | Usuario: `standard_user` · Contraseña: `secret_sauce` (solo para la precondición) |
+| Automatizar | Sí. Determinista; P1 en regresión; la precondición de sesión se resuelve con un fixture, por lo que el costo de mantenimiento es bajo. |
+
+**Pasos**
+1. Abrir el menú lateral (botón de menú, esquina superior izquierda).
+2. Pulsar la opción Logout.
+3. Intentar acceder directamente a `https://www.saucedemo.com/inventory.html`.
+
+**Resultado esperado**
+- Tras el paso 2: el sistema redirige a `https://www.saucedemo.com/` y se muestra el formulario de login (usuario, contraseña y botón Login).
+- Tras el paso 3: el sistema redirige a `https://www.saucedemo.com/` y muestra el mensaje `Epic sadface: You can only access '/inventory.html' when you are logged in.`, lo que confirma que la sesión terminó.
+- No se muestra el contenedor del inventario.
+
+

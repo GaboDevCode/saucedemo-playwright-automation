@@ -1,5 +1,7 @@
 import pytest
 from playwright.sync_api import Page, expect
+
+from pages import InventoryPage
 from pages.login_page import LoginPage
 
 
@@ -7,6 +9,10 @@ from pages.login_page import LoginPage
 USERNAME_REQUIRED_ERROR = "Epic sadface: Username is required"
 PASSWORD_REQUIRED_ERROR = "Epic sadface: Password is required"
 INVALID_CREDENTIALS_ERROR = ("Epic sadface: Username and password do not match any user in this service")
+USER_BLOCKED_ERROR = "Epic sadface: Sorry, this user has been locked out."
+
+
+
 
 
 @pytest.mark.smoke
@@ -76,11 +82,18 @@ def test_login_invalid_credentials(page: Page, username: str, password: str):
             "secret_sauce",
             USERNAME_REQUIRED_ERROR,
             id="TC-LOGIN-007-login_empty_user_valid_password",
+        ),
+        pytest.param(
+            "locked_out_user",
+            "secret_sauce",
+            USER_BLOCKED_ERROR,
+            id="TC-LOGIN-008-login_locked_out_user"
+            ,
         )
     ]
 )
-def test_login_credentials_required(page: Page, username: str, password: str, expected_error: str):
-    """SC-LOGIN-005/006/007 | REQ-LOGIN-03"""
+def test_login_rejected(page: Page, username: str, password: str, expected_error: str):
+    """SC-LOGIN-005/006/007 | REQ-LOGIN-03 · SC-LOGIN-008 | REQ-LOGIN-04"""
     login_page = LoginPage(page)
     login_page.navigate_to_login()
     login_page.login(username, password)
@@ -92,7 +105,67 @@ def test_login_credentials_required(page: Page, username: str, password: str, ex
 
 
 
+@pytest.mark.regression
+@pytest.mark.parametrize(
+    "path, expected_error",
+    [
+        pytest.param(
+    "/inventory.html",
+            "Epic sadface: You can only access '/inventory.html' when you are logged in.",
+            id="TC-LOGIN-009-inventory"
+        ),
+        pytest.param(
+        "/cart.html",
+                "Epic sadface: You can only access '/cart.html' when you are logged in.",
+         id="TC-LOGIN-009-Cart"
+       ),
+        pytest.param(
+    "/checkout-step-one.html",
+            "Epic sadface: You can only access '/checkout-step-one.html' when you are logged in.",
+        id="TC-LOGIN-009-checkout_step_one"
+    ),
+  ]
+)
 
+
+def test_access_internal_page_without_session(page: Page, path: str, expected_error: str):
+    """SC-LOGIN-009 | REQ-LOGIN-05"""
+
+    login_page = LoginPage(page)
+    page.goto(path)
+
+    expect(page).to_have_url("/")
+    expect(login_page.error_message).to_have_text(expected_error)
+    expect(page.locator('[data-test="inventory-container"]')).not_to_be_visible()
+
+
+
+
+
+
+
+@pytest.mark.regression
+def test_logout_from_menu(page, logged_in_inventory):
+    """TC-LOGIN-010 | SC-LOGIN-010 | REQ-LOGIN-06"""
+
+    inventory = logged_in_inventory
+    login_page = LoginPage(page)
+
+    inventory.open_menu()
+    inventory.click_logout()
+
+    expect(page).to_have_url("/")
+    expect(login_page.username).to_be_visible()
+    expect(login_page.password).to_be_visible()
+    expect(login_page.login_button).to_be_visible()
+
+    page.goto("/inventory.html")
+
+    expect(page).to_have_url("/")
+    expect(login_page.error_message).to_have_text(
+        "Epic sadface: You can only access '/inventory.html' when you are logged in."
+    )
+    expect(page.locator('[data-test="inventory-container"]')).not_to_be_visible()
 
 
 
