@@ -48,11 +48,10 @@ Swag Labs **no cuenta con documento de requisitos formal**. Los requisitos (`REQ
 
 | Módulo                   | Diseño de pruebas | Automatización | Detalle                                                                 |
 | ------------------------ | ----------------- | -------------- | ----------------------------------------------------------------------- |
-| **Login**                | Completo (base)   | Completa (base) | 7 casos (TC-LOGIN-001 a 007). Pendientes: usuario bloqueado, acceso sin sesión y logout |
+| **Login**                | Completo          | Completa       | 10 casos (TC-LOGIN-001 a 010): login válido/inválido, usuario bloqueado, acceso sin sesión y logout |
 | **Carrito**              | Pendiente         | Pendiente      | —                                                                       |
 | **Checkout**             | Pendiente         | Pendiente      | —                                                                       |
 | **Detalles de producto** | Pendiente         | Pendiente      | —                                                                       |
-
 ---
 
 ## Documentación

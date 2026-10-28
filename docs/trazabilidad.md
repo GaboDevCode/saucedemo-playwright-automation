@@ -12,4 +12,4 @@
 | REQ-LOGIN-03 | SC-LOGIN-007 | TC-LOGIN-007 | P1 | Sí | `test_login_rejected[TC-LOGIN-007-login_empty_user_valid_password]`   | Automatizado |
 | REQ-LOGIN-04 | SC-LOGIN-008 | TC-LOGIN-008 | P1 | Sí | `test_login_rejected[TC-LOGIN-008-login_locked_out_user]`             | Automatizado |
 |REQ-LOGIN-05| SC-LOGIN-009 | TC-LOGIN-009 | P1 | Sí | `test_access_internal_page_without_session` | Automatizado |
-|REQ-LOGIN-06| SC-LOGIN-010 | TC-LOGIN-010 | P1 | Sí | `test_logout_from_menu` | Desarrollo |
+|REQ-LOGIN-06| SC-LOGIN-010 | TC-LOGIN-010 | P1 | Sí | `test_logout_from_menu` | Automatizado |
