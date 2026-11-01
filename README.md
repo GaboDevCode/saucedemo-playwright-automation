@@ -72,6 +72,7 @@ Todo el proceso de diseño de pruebas se encuentra en la carpeta [`docs/`](docs/
 ---
 
 
+
 ## Evidencia de ejecución
 
 Resultados de ejecución por módulo.
@@ -79,7 +80,11 @@ Resultados de ejecución por módulo.
 | Módulo | Evidencia | Resultado |
 | ------ | --------- | --------- |
 | **Login** | [Reporte Allure de Login](evidence/login/) | 12 pruebas ejecutadas, 12 aprobadas |
+
+### Evidencia visual - Login
+
 ![Resumen del reporte Allure de Login](evidence/login/allure-overview.png)
+
 
 ## Alcance
 
