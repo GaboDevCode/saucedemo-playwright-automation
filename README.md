@@ -37,7 +37,7 @@ Swag Labs **no cuenta con documento de requisitos formal**. Los requisitos (`REQ
 | Navegadores             | Chromium y Firefox                         |
 | Patrón de diseño        | Page Object Model (POM)                    |
 | Gestión de dependencias | requirements.txt                           |
-| Reportes                | pytest-html y/o Allure (según evolución)   |
+| Reportes                | Allure |
 | Gestión de defectos     | GitHub Issues (etiquetas de severidad)     |
 | Control de versiones    | Git + GitHub                               |
 | Integración continua    | GitHub Actions (planeado para una fase posterior) |
@@ -70,6 +70,17 @@ Todo el proceso de diseño de pruebas se encuentra en la carpeta [`docs/`](docs/
 > Los documentos de los demás módulos se agregan conforme avanza el proyecto.
 
 ---
+
+
+## Evidencia de ejecución
+
+Resultados de ejecución por módulo.
+
+| Módulo | Evidencia | Resultado |
+| ------ | --------- | --------- |
+| **Login** | [Reporte Allure de Login](evidence/login/README.md) | 12 pruebas ejecutadas, 12 aprobadas |
+
+![Resumen del reporte Allure de Login](evidence/login/allure-overview.png)
 
 ## Alcance
 
@@ -295,7 +306,8 @@ La [matriz de trazabilidad](docs/trazabilidad.md) registra, para cada caso: requ
 │       └── test_login.py
 ├── conftest.py              # Fixtures de pytest (planeado)
 ├── data/                    # Datos de prueba (planeado)
-└── evidence/                # Capturas, trazas y videos (planeado)
+├── evidence/                # Evidencias de ejecución por módulo
+│   └── login/
 ```
 
 ---
@@ -316,5 +328,15 @@ pytest -m regression
 # Todos los tests
 pytest
 ```
+### Reporte Allure
 
+Requiere el CLI de Allure y Java instalados (ver la [documentación oficial](https://allurereport.org/docs/)).
+
+```bash
+# Ejecutar guardando los resultados (limpia la ejecución anterior)
+pytest --alluredir=allure-results --clean-alluredir
+
+# Abrir el reporte en el navegador
+allure serve allure-results
+```
 ---

@@ -1,2 +1,3 @@
 pytest==9.1.1
-pytest-playw    right==0.9.0
+pytest-playwright==0.9.0
+allure-pytest==2.16.2

@@ -5,8 +5,8 @@
 | **Proyecto:** | Swag Labs (Sauce Demo) |
 | **Autor:** | Eduardo Gabriel Bocanegra Toledo |
 | **Fecha de creación:** | 2026-10-03 |
-| **Última actualización:** | 2026-10-03 |
-| **Versión del plan:** | v1.2 |
+| **Última actualización:** | 2026-10-31 |
+| **Versión del plan:** | v1.3 |
 | **Estado:** | Vigente |
  
 ---
@@ -42,9 +42,9 @@ Cualquier comportamiento que la aplicación muestre y que no se pueda contrastar
 | **A. Login** | Inicio de sesión válido e inválido, usuarios bloqueados, validaciones de campos, cierre de sesión, acceso sin sesión | Puerta de entrada; si falla, nada más es accesible |
 | **B. Carrito** | Ver contenido, quitar productos, continuar comprando, persistencia del contenido | Paso obligatorio antes del pago; afecta el total de la compra |
 | **C. Checkout** | Datos del cliente (paso 1), resumen y totales (paso 2), finalización (paso 3), cancelación | Flujo de mayor valor de negocio: es el que genera la compra |
-| **D. Detalles de producto** | Visualizar los datos principales del producto: nombre, precio y descripción | El precio mostrado debe ser coherente con el del carrito y el checkout; es el origen de los datos de la compra |
- 
-> Agregar un producto al carrito se usa como **precondición** de los módulos B y C; su comportamiento propio se prueba solo en lo necesario para esos flujos.
+| **D. Detalles de producto** | Visualizar los datos principales del producto (nombre, precio y descripción) y agregar o quitar el producto del carrito desde la vista de detalle (cambio del botón, contador del carrito y presencia del producto en el carrito) | El precio mostrado debe ser coherente con el del carrito y el checkout; es el origen de los datos de la compra |
+
+> Agregar o quitar un producto del carrito desde el catálogo se usa como **precondición** de los módulos B y C. El comportamiento del botón "Add to cart" / "Remove" **dentro de la vista de detalle** sí es parte del módulo D (REQ-DETAIL-03 y REQ-DETAIL-04). En esos requisitos el carrito se consulta únicamente como referencia para verificar el resultado; su comportamiento propio se prueba en el módulo B.
  
 ### 2.2 Tipos de prueba
 - **Funcionales:** comportamiento de cada módulo contra los requisitos derivados.
@@ -254,3 +254,4 @@ La **prioridad** indica qué tan importante es probar un caso. Se asigna al dise
 | v1.0 | 2026-10-03 | Versión inicial |
 | v1.1 | 2026-10-03 | Objetivos medibles, base de pruebas, justificación del alcance, criterios de automatización, datos de prueba, criterios de entrada/salida, roles, métricas, riesgos del proyecto real |
 | v1.2 | 2026-10-03 | Se agrega el módulo D (Detalles de producto) y se corrige la contradicción con el fuera de alcance; se agrega la sección 3.7 con la definición de prioridades P0, P1 y P2 |
+| v1.3 | 2026-10-31 | Se amplía el alcance del módulo D (Detalles de producto) para incluir el botón "Add to cart" en la vista de detalle (cambio a "Remove" y contador del carrito); se ajusta la nota de 2.1 sobre agregar al carrito como precondición |
