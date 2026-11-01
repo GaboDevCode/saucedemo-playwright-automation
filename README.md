@@ -78,8 +78,7 @@ Resultados de ejecución por módulo.
 
 | Módulo | Evidencia | Resultado |
 | ------ | --------- | --------- |
-| **Login** | [Reporte Allure de Login](evidence/login/README.md) | 12 pruebas ejecutadas, 12 aprobadas |
-
+| **Login** | [Reporte Allure de Login](evidence/login/) | 12 pruebas ejecutadas, 12 aprobadas |
 ![Resumen del reporte Allure de Login](evidence/login/allure-overview.png)
 
 ## Alcance
