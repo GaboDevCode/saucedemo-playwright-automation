@@ -2,7 +2,10 @@ import pytest
 from playwright.sync_api import Page, expect
 
 from pages import InventoryPage
+import allure
 from pages.login_page import LoginPage
+
+pytestmark = allure.feature("Login")
 
 
 
@@ -14,7 +17,7 @@ USER_BLOCKED_ERROR = "Epic sadface: Sorry, this user has been locked out."
 
 
 
-
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.smoke
 def test_login_valid_credentials(page: Page):
     """TC-LOGIN-001 | SC-LOGIN-001 | REQ-LOGIN-01"""
@@ -26,7 +29,7 @@ def test_login_valid_credentials(page: Page):
     expect(page.locator('[data-test="inventory-container"]')).to_be_visible()
 
 
-
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.regression
 @pytest.mark.parametrize(
     "username, password",
@@ -60,7 +63,7 @@ def test_login_invalid_credentials(page: Page, username: str, password: str):
 
 
 
-
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.regression
 @pytest.mark.parametrize(
     "username, password, expected_error",
@@ -104,7 +107,7 @@ def test_login_rejected(page: Page, username: str, password: str, expected_error
 
 
 
-
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.regression
 @pytest.mark.parametrize(
     "path, expected_error",
@@ -143,7 +146,7 @@ def test_access_internal_page_without_session(page: Page, path: str, expected_er
 
 
 
-
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.regression
 def test_logout_from_menu(page, logged_in_inventory):
     """TC-LOGIN-010 | SC-LOGIN-010 | REQ-LOGIN-06"""
