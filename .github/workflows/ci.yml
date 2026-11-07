@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Say hello
+        run: echo "CI is alive on branch ${{ github.ref_name }}"
+
+      - name: Show Python version
+        run: python3 --version
+
+      - name: List repository files
+        run: ls -la
