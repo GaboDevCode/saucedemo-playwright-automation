@@ -119,7 +119,7 @@ def test_login_rejected(page: Page, username: str, password: str, expected_error
         ),
         pytest.param(
         "/cart.html",
-                "Epic sadface: You can only access '/cart.html'",
+                "Epic sadface: You can only access '/cart.html' when you are logged in.",
          id="TC-LOGIN-009-Cart"
        ),
         pytest.param(
